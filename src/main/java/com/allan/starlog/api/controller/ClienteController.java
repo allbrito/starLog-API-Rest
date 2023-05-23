@@ -1,4 +1,4 @@
-package com.allan.starlog.controller;
+package com.allan.starlog.api.controller;
 
 import java.util.List;
 
@@ -45,26 +45,11 @@ public class ClienteController {
 
 	@PutMapping("/{id}")
 	public ResponseEntity<Cliente> atualizar(@Valid @PathVariable Long id, @RequestBody Cliente cliente) {
-
-		if (clienteService.getRepository().existsById(id)) {
-
-			cliente.setId(id);
-			cliente = clienteService.adicionar(cliente);
-
-			return ResponseEntity.ok(cliente);
-		}
-		return ResponseEntity.notFound().build();
+		return clienteService.atualizar(id, cliente);
 	}
 
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> deletar(@PathVariable Long id) {
-
-		if (clienteService.getRepository().existsById(id)) {
-
-			clienteService.deletar(id);
-
-			return ResponseEntity.noContent().build();
-		}
-		return ResponseEntity.notFound().build();
+		return clienteService.deletar(id);
 	}
 }

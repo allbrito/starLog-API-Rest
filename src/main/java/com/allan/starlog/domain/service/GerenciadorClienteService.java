@@ -18,35 +18,59 @@ public class GerenciadorClienteService {
 
 	@Autowired
 	@Getter
-	private ClienteRepository repository;
+	private ClienteRepository clienteRepository;
 	
 	@Transactional
 	public List<Cliente> listar(){
-		return repository.findAll();
+		return clienteRepository.findAll();
 	}
 	
 	@Transactional
 	public ResponseEntity<Cliente> buscar(Long id){
-		return repository.findById(id).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+		return clienteRepository.findById(id)
+				.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
 	}
 	
 	@Transactional
 	public Cliente adicionar(Cliente cliente) {
 		
-		boolean existeEmail = repository.findByEmail(cliente.getEmail())
+		boolean existeEmail = clienteRepository.findByEmail(cliente.getEmail())
 				.stream().anyMatch(existeCliente -> !existeCliente.equals(cliente));
 		
 		if (existeEmail) {
-			
-			String mensagem = "já existe um cliente cadastrado com esse email";
-			throw new NegocioException(mensagem);
+			throw new NegocioException("já existe um cliente cadastrado com esse email");
 		}
 		
-		return repository.save(cliente);
+		return clienteRepository.save(cliente);
 	}
 	
 	@Transactional
-	public void deletar(Long id) {
-		repository.deleteById(id);
+	public ResponseEntity<Cliente> atualizar(Long id, Cliente cliente){
+		
+		if (clienteRepository.existsById(id)) {
+			
+			cliente.setId(id);
+			cliente = adicionar(cliente);
+			
+			return ResponseEntity.ok(cliente);
+		}
+		return ResponseEntity.notFound().build();
+	}
+	
+	@Transactional
+	public ResponseEntity<Void> deletar(Long id) {
+		
+		if (clienteRepository.existsById(id)) {
+			
+			clienteRepository.deleteById(id);
+			
+			return ResponseEntity.noContent().build();
+		}
+		return ResponseEntity.notFound().build();
+	}
+	
+	public Cliente verificar(Long id) {
+		return clienteRepository.findById(id)
+				.orElseThrow(() -> new NegocioException("Cliente não encontrado"));
 	}
 }

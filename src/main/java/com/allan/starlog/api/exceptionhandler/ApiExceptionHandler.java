@@ -1,6 +1,6 @@
-package com.allan.starlog.exceptionhandler;
+package com.allan.starlog.api.exceptionhandler;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,7 +45,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 		
 		mensagem = "Um ou mais campos estão inválidos. Faça o preenchimento correto e tente novamente";
 		
-		var problema = new Problema(status.value(), LocalDateTime.now(), mensagem, campos);
+		var problema = new Problema(status.value(), OffsetDateTime.now(), mensagem, campos);
 		
 		return handleExceptionInternal(ex, problema, headers, status, request);
 	}
@@ -56,7 +56,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 		HttpStatus status = HttpStatus.BAD_REQUEST;
 		mensagem = ex.getMessage();
 				
-		var problema = new Problema(status.value(), LocalDateTime.now(), mensagem);
+		var problema = new Problema(status.value(), OffsetDateTime.now(), mensagem);
 		
 		return handleExceptionInternal(ex, problema, new HttpHeaders(), status, request ); 
 	}

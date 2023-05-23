@@ -1,4 +1,4 @@
-package com.allan.starlog.exceptionhandler;
+package com.allan.starlog.api.exceptionhandler;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
