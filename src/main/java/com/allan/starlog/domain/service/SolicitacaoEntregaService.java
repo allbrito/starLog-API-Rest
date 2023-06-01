@@ -5,9 +5,9 @@ import java.time.OffsetDateTime;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.allan.starlog.domain.model.Cliente;
-import com.allan.starlog.domain.model.Entrega;
-import com.allan.starlog.domain.model.StatusEntrega;
+import com.allan.starlog.domain.entities.ClienteEntitiy;
+import com.allan.starlog.domain.entities.EntregaEntity;
+import com.allan.starlog.domain.entities.StatusEntrega;
 import com.allan.starlog.domain.repository.EntregaRepository;
 
 import lombok.AllArgsConstructor;
@@ -20,9 +20,9 @@ public class SolicitacaoEntregaService {
 	private EntregaRepository entregaRepository;
 	
 	@Transactional
-	public Entrega solicitar(Entrega entrega) {
+	public EntregaEntity solicitar(EntregaEntity entrega) {
 		
-		Cliente cliente = clienteService.verificar(entrega.getCliente().getId());
+		ClienteEntitiy cliente = clienteService.verificar(entrega.getCliente().getId());
 		
 		entrega.setCliente(cliente);
 		entrega.setStatus(StatusEntrega.PENDENTE);

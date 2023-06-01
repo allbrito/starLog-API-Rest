@@ -1,4 +1,4 @@
-package com.allan.starlog.domain.model;
+package com.allan.starlog.domain.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;

@@ -3,7 +3,7 @@ package com.allan.starlog.api.model;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 
-import com.allan.starlog.domain.model.StatusEntrega;
+import com.allan.starlog.domain.entities.StatusEntrega;
 
 import lombok.Getter;
 import lombok.Setter;

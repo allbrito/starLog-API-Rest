@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.allan.starlog.api.mapper.EntregaMapper;
 import com.allan.starlog.api.model.EntregaModel;
-import com.allan.starlog.domain.model.Entrega;
+import com.allan.starlog.domain.entities.EntregaEntity;
 import com.allan.starlog.domain.repository.EntregaRepository;
 import com.allan.starlog.domain.service.SolicitacaoEntregaService;
 
@@ -44,8 +44,8 @@ public class EntregaController {
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public EntregaModel solicitar(@Valid @RequestBody Entrega entrega) {
-		Entrega entregaSolicitada = entregaService.solicitar(entrega);
+	public EntregaModel solicitar(@Valid @RequestBody EntregaEntity entrega) {
+		EntregaEntity entregaSolicitada = entregaService.solicitar(entrega);
 		return entregaMapper.toModel(entregaSolicitada);
 	}
 }

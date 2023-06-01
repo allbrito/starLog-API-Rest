@@ -1,4 +1,4 @@
-package com.allan.starlog.domain.model;
+package com.allan.starlog.domain.entities;
 
 public enum StatusEntrega {
 

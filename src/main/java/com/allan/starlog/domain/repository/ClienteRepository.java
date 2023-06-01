@@ -5,10 +5,10 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.allan.starlog.domain.model.Cliente;
+import com.allan.starlog.domain.entities.ClienteEntitiy;
 
 @Repository
-public interface ClienteRepository extends JpaRepository<Cliente, Long>{
+public interface ClienteRepository extends JpaRepository<ClienteEntitiy, Long>{
 	
-	Optional<Cliente> findByEmail(String email);
+	Optional<ClienteEntitiy> findByEmail(String email);
 }

@@ -1,4 +1,4 @@
-package com.allan.starlog.domain.model;
+package com.allan.starlog.domain.entities;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
@@ -27,7 +27,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
-public class Entrega {
+public class EntregaEntity {
 	
 	@EqualsAndHashCode.Include
 	@Id
@@ -38,7 +38,7 @@ public class Entrega {
 	@ConvertGroup(from = Default.class, to = ValidationGroups.ClienteId.class)
 	@NotNull
 	@ManyToOne
-	private Cliente cliente;
+	private ClienteEntitiy cliente;
 	
 	@Valid
 	@NotNull

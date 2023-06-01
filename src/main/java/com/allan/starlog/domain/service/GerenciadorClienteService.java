@@ -7,8 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.allan.starlog.domain.entities.ClienteEntitiy;
 import com.allan.starlog.domain.exception.NegocioException;
-import com.allan.starlog.domain.model.Cliente;
 import com.allan.starlog.domain.repository.ClienteRepository;
 
 import lombok.Getter;
@@ -21,18 +21,18 @@ public class GerenciadorClienteService {
 	private ClienteRepository clienteRepository;
 	
 	@Transactional
-	public List<Cliente> listar(){
+	public List<ClienteEntitiy> listar(){
 		return clienteRepository.findAll();
 	}
 	
 	@Transactional
-	public ResponseEntity<Cliente> buscar(Long id){
+	public ResponseEntity<ClienteEntitiy> buscar(Long id){
 		return clienteRepository.findById(id)
 				.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
 	}
 	
 	@Transactional
-	public Cliente adicionar(Cliente cliente) {
+	public ClienteEntitiy adicionar(ClienteEntitiy cliente) {
 		
 		boolean existeEmail = clienteRepository.findByEmail(cliente.getEmail())
 				.stream().anyMatch(existeCliente -> !existeCliente.equals(cliente));
@@ -45,7 +45,7 @@ public class GerenciadorClienteService {
 	}
 	
 	@Transactional
-	public ResponseEntity<Cliente> atualizar(Long id, Cliente cliente){
+	public ResponseEntity<ClienteEntitiy> atualizar(Long id, ClienteEntitiy cliente){
 		
 		if (clienteRepository.existsById(id)) {
 			
@@ -69,7 +69,7 @@ public class GerenciadorClienteService {
 		return ResponseEntity.notFound().build();
 	}
 	
-	public Cliente verificar(Long id) {
+	public ClienteEntitiy verificar(Long id) {
 		return clienteRepository.findById(id)
 				.orElseThrow(() -> new NegocioException("Cliente não encontrado"));
 	}

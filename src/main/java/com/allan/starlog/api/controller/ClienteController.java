@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.allan.starlog.domain.model.Cliente;
+import com.allan.starlog.domain.entities.ClienteEntitiy;
 import com.allan.starlog.domain.service.GerenciadorClienteService;
 
 import jakarta.validation.Valid;
@@ -28,23 +28,23 @@ public class ClienteController {
 	private GerenciadorClienteService clienteService;	
 
 	@GetMapping
-	public List<Cliente> listar() {
+	public List<ClienteEntitiy> listar() {
 		return clienteService.listar();
 	}
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Cliente> buscar(@PathVariable Long id) {
+	public ResponseEntity<ClienteEntitiy> buscar(@PathVariable Long id) {
 		return clienteService.buscar(id);
 	}
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Cliente adicionar(@Valid @RequestBody Cliente cliente) {
+	public ClienteEntitiy adicionar(@Valid @RequestBody ClienteEntitiy cliente) {
 		return clienteService.adicionar(cliente);
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Cliente> atualizar(@Valid @PathVariable Long id, @RequestBody Cliente cliente) {
+	public ResponseEntity<ClienteEntitiy> atualizar(@Valid @PathVariable Long id, @RequestBody ClienteEntitiy cliente) {
 		return clienteService.atualizar(id, cliente);
 	}
 
